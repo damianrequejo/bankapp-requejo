@@ -24,7 +24,7 @@ const Navbar = () => {
               <Link to="/contacto" class="nav-link" aria-current="page" >Contacto</Link>
             </li>
           </ul>
-          <Link to="/Cart">
+          <Link to="/cart">
             <CartWidget />
           </Link>
         </div>

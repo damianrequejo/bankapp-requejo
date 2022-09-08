@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
 import './cartwidget.css';
 
 const CartWidget = () => {
   return (
-    <span class="material-symbols-rounded">
+    <div>
+      <span class="material-symbols-rounded">
       account_balance_wallet
-    </span>
+      </span>
+    </div>
   )
   
 }
 
-export default CartWidget
+export default CartWidget;

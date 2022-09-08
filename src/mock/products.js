@@ -35,7 +35,7 @@ export const products = [
         id: 5,
         title: 'Visa Platinium',
         price: 800,
-        stock: 10,
+        stock: 5,
         category: 'empresas',
         img: '../img/tc-visa.png',
     },
