@@ -1,14 +1,19 @@
 import React, {useState} from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../context/CartContext';
 //import ItemCount from '../Counter/ItemCount';
 import Counter from '../Counter/ItemCount';
 
 const ItemDetail = ({ item }) => {
-    const [cantidad, setCantidad] = useState(0)
-    const onAdd = (cantidad) => {
-        setCantidad(cantidad);
-        
+    const [cantidad, setCantidad] = useState(0);
+    const { addItem } = useContext(CartContext);
+    
+    const onAdd = (cantidadItem) => {
+        setCantidad(cantidadItem);
+        addItem(item, cantidadItem);
     };
+
     return (
         <div style={{ display: 'flex' }}>
             <img src={item.img} alt={item.title} />
