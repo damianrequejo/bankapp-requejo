@@ -18,9 +18,9 @@ const ItemDetail = ({ item }) => {
         <div style={{ display: 'flex' }}>
             <img src={item.img} alt={item.title} />
             <div>
-                <h3>{item.title}</h3>
-                <h3>{item.category}</h3>
-                <h3>$ {item.price}</h3>
+                <h4>{item.title}</h4>
+                <h4>{item.category}</h4>
+                <h4>$ {item.price}</h4>
                 {cantidad === 0 ? <Counter stock={item.stock} initial={1} onAdd={onAdd} /> : <Link to="/cart">Ir a la Billetera</Link>}
             </div>
         </div>

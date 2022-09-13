@@ -26,7 +26,7 @@ const CartProvider = ({ children }) => {
             if (prod.id === item.id) {
                 const productUpdated = {
                     ...prod,
-                    cantidad: cantidad,
+                    cantidad: cantidad + prod.cantidad,
                 };
 
                 return productUpdated;

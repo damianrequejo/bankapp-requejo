@@ -33,7 +33,7 @@ export const products = [
     },
     {
         id: 5,
-        title: 'Visa Platinium',
+        title: 'Visa Corporate',
         price: 800,
         stock: 5,
         category: 'empresas',

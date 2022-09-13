@@ -29,8 +29,14 @@ const ItemListContainer = ({ saludo }) => {
     }, [id]);
 
     return (
-        <div>
-            <h2>{saludo}</h2>
+        <div
+        style={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'column',
+        }}
+        >
+            <h2 style={{ textAlign: 'center' }}>{saludo}</h2>
             <ItemList items={items} />
         </div>
 
