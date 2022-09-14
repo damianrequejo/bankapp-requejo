@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { products } from '../../mock/products';
 import ItemList from '../ItemList/ItemList';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../firebaseConfig';
 
 const ItemListContainer = ({ saludo }) => {
     const [items, setItems] = useState([]);
     const { id } = useParams();
     
     useEffect(() => {
-        const getProducts = new Promise((res, rej) => {
-        const prodFiltrados = products.filter( (prod) => prod.category === id);
-        
-        setTimeout(() => {
-            res(id ? prodFiltrados : products);
-            }, 500);
-        });
-
-        getProducts
-            .then((data) => {
-                setItems(data);
+        const itemCollection = collection(db,"productos");
+        if (id) {
+            const q = query(itemCollection, where("category","==", id));
+            getDocs(q)
+            .then((res)=>{
+                const products = res.docs.map((prod)=>{
+                    return { 
+                        id: prod.id,
+                        ...prod.data()
+                    }
+                });
+                setItems(products);
             })
             .catch((error) => {
                 //console.log(error);
@@ -26,6 +28,25 @@ const ItemListContainer = ({ saludo }) => {
             .finally(() => {
                 //console.log('Finally');
             });
+                
+        } else {
+            getDocs(itemCollection)
+            .then((res)=>{
+                const products = res.docs.map((prod)=>{
+                    return { 
+                        id: prod.id,
+                        ...prod.data()
+                    }
+                });
+                setItems(products);
+            })
+            .catch((error) => {
+                //console.log(error);
+            })
+            .finally(() => {
+                //console.log('Finally');
+            });
+        }
     }, [id]);
 
     return (

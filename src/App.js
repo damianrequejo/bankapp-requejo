@@ -9,7 +9,7 @@ import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailCont
 import { BrowserRouter } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
 import Cart from './components/Cart/Cart';
-import CartProvider, { CartContext } from './context/CartContext';
+import CartProvider from './context/CartContext';
 
 function App() {
   const saludo = "Bienvenido a BankApp";
