@@ -44,6 +44,7 @@ const Cart = () => {
                 >
                     <img src={prod.img} alt={prod.title} width="65px" height="40px"/>
                     <h3>{prod.title}</h3>
+                    <h3>{prod.category}</h3>
                     <h3>Cantidad: {prod.cantidad}</h3>
                     <h3>Precio: ${prod.price}.-</h3>
                     <button onClick={() => removeItem(prod.id)}>Eliminar</button>

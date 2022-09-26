@@ -12,6 +12,7 @@ const ItemListContainer = ({ saludo }) => {
         const itemCollection = collection(db,"productos");
         if (id) {
             const q = query(itemCollection, where("category","==", id));
+            console.log(q);
             getDocs(q)
             .then((res)=>{
                 const products = res.docs.map((prod)=>{
@@ -23,10 +24,10 @@ const ItemListContainer = ({ saludo }) => {
                 setItems(products);
             })
             .catch((error) => {
-                //console.log(error);
+                console.log(error);
             })
             .finally(() => {
-                //console.log('Finally');
+                console.log('Finally');
             });
                 
         } else {
@@ -41,10 +42,10 @@ const ItemListContainer = ({ saludo }) => {
                 setItems(products);
             })
             .catch((error) => {
-                //console.log(error);
+                console.log(error);
             })
             .finally(() => {
-                //console.log('Finally');
+                console.log('Finally');
             });
         }
     }, [id]);

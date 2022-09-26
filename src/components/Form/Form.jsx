@@ -6,7 +6,6 @@ import {
 import React, { useState } from 'react';
 import { db } from '../../firebaseConfig';
 
-
 const Form = ({ cart, total, clearCart, handleId }) => {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
@@ -30,7 +29,6 @@ const Form = ({ cart, total, clearCart, handleId }) => {
     };
 
     const handleChangeNombre = (event) => {
-        //console.log(event.target.value);
         setNombre(event.target.value);
     };
 
