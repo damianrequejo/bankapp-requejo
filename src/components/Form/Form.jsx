@@ -1,26 +1,33 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import {
+    addDoc,
+    collection,
+    serverTimestamp,
+} from 'firebase/firestore';
+import React, { useState } from 'react';
+import { db } from '../../firebaseConfig';
 
-const Form = () => {
-    //const [datosorm, setDatosForm] = useState(initialState);
+
+const Form = ({ cart, total, clearCart, handleId }) => {
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
-    const [talle, setTalle] = useState('');
-    //const [x, setX] = useState('');
+    const [mail, setMail] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        //console.log(event.target.elements.nombre.value);
-        //console.log(event.target.elements.apellido.value);
-        //console.dir(event.target);
-        console.log(nombre, apellido, talle); //enviar la info a la base de datos
-        //setNombre('');
-    };
+        const order = {
+            buyer: { nombre: nombre, apellido: apellido, mail: mail },
+            items: cart,
+            total: total,
+            date: serverTimestamp(),
+        };
 
-    // const handleChange = () => {
-    //     //name y value de cada input
-    // }
+        const ordersCollection = collection(db, 'ordenes');
+
+        addDoc(ordersCollection, order).then((res) => {
+            handleId(res.id);
+            clearCart();
+        });
+    };
 
     const handleChangeNombre = (event) => {
         //console.log(event.target.value);
@@ -31,23 +38,9 @@ const Form = () => {
         setApellido(event.target.value);
     };
 
-    const handleChangeTalle = (e) => {
-        setTalle(e.target.value);
+    const handleChangeMail = (event) => {
+        setMail(event.target.value);
     };
-
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            //setX(e.clientX);
-        };
-        window.addEventListener('mousemove', handleMouseMove);
-        console.log('Creo evento');
-        return () => {
-            //se ejecuta siempre antes del código del useEffect salvo en el primer render
-            //clearInterval()
-            window.removeEventListener('mousemove', handleMouseMove);
-            console.log('Borro evento');
-        };
-    });
 
     return (
         <div style={{ marginTop: '20px' }}>
@@ -66,11 +59,14 @@ const Form = () => {
                     value={apellido}
                     onChange={handleChangeApellido}
                 />
-                <select value={talle} onChange={handleChangeTalle}>
-                    <option value="Large">L</option>
-                    <option value="Medium">M</option>
-                    <option value="Small">S</option>
-                </select>
+                <input
+                    type="text"
+                    placeholder="Mail..."
+                    name="mail"
+                    value={mail}
+                    onChange={handleChangeMail}
+                />
+                
                 <button>Enviar</button>
             </form>
         </div>
